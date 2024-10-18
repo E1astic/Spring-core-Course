@@ -11,12 +11,13 @@
           class="ru.fil.springcourse.ClassicalMusic">
     </bean>
 
-    <bean id="rockMusicBean"
-          class="ru.fil.springcourse.RockMusic">
-    </bean>
-
     <bean id="hipHopMusicBean"
           class="ru.fil.springcourse.HipHopMusic">
+    </bean>
+
+    <bean id="musicPlayer"
+          class="ru.fil.springcourse.MusicPlayer">
+        <constructor-arg ref="hipHopMusicBean"/>
     </bean>
 
 
