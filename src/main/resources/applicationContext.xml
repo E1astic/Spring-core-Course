@@ -7,14 +7,17 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="testBean1"
-          class="ru.fil.springcourse.TestBean">
-        <constructor-arg value="testBean_name1"/>
+    <bean id="classicalMusicBean"
+          class="ru.fil.springcourse.ClassicalMusic">
     </bean>
 
-    <bean id="testBean2"
-          class="ru.fil.springcourse.TestBean">
-        <constructor-arg value="testBean_name2"/>
+    <bean id="rockMusicBean"
+          class="ru.fil.springcourse.RockMusic">
     </bean>
+
+    <bean id="hipHopMusicBean"
+          class="ru.fil.springcourse.HipHopMusic">
+    </bean>
+
 
 </beans>
