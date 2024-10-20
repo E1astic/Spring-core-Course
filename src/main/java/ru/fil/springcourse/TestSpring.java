@@ -12,7 +12,18 @@ public class TestSpring {
 
         try {
             MusicPlayer player = context.getBean("musicPlayer", MusicPlayer.class);
-            player.playMusic();
+
+//            Под капотом:
+//            MusicPlayer musicPlayer=new MusicPlayer();
+//            Music music1=new ClassicalMusic();
+//            Music music2=new RockMusic();
+//            Music music3=new HipHopMusic();
+//            List<Music> musicList=Arrays.asList(music1, music2, music3);
+//            musicPlayer.setMusicList(musicList);
+//
+
+            player.playAllMusic();
+
         }
         catch(NoSuchBeanDefinitionException e) {
             System.out.println("Bean not found");

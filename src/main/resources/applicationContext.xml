@@ -1,24 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans  xmlns="http://www.springframework.org/schema/beans"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:context="http://www.springframework.org/schema/context"
-        xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!-- загружаем содержимое файла musicPlayer.properties-->
+    <context:property-placeholder location="classpath:musicPlayer.properties" />
+
+
+    <!-- создали 3 бина каждого вида музыки -->
     <bean id="classicalMusicBean"
           class="ru.fil.springcourse.ClassicalMusic">
     </bean>
-
+    <bean id="rockMusicBean"
+          class="ru.fil.springcourse.RockMusic">
+    </bean>
     <bean id="hipHopMusicBean"
           class="ru.fil.springcourse.HipHopMusic">
     </bean>
 
+    <!-- создали бин списка из 3 видов музыки -->
+    <bean id="musicList"
+          class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean = "classicalMusicBean"/>
+                <ref bean="rockMusicBean"/>
+                <ref bean="hipHopMusicBean" />
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- создали бин плеера, где через сеттер передали созданный список -->
     <bean id="musicPlayer"
           class="ru.fil.springcourse.MusicPlayer">
-        <constructor-arg ref="hipHopMusicBean"/>
+        <property name="musicList" ref="musicList"/>
     </bean>
+
+
+    <!-- property - вызываем сеттер с параметром ref (слово set в названии сеттера отбрасывается спрингом,
+    все переводится в нижний регистр и ищется только music из setMusic
+    <bean id="musicPlayer"
+          class="ru.fil.springcourse.MusicPlayer">
+        <property name="music" ref="classicalMusicBean" />
+
+        <property name="name" value="${musicPlayer.name}" />     подставляем объекты из файла
+        <property name="volume" value="${musicPlayer.volume}"/>
+    </bean> -->
 
 
 </beans>
