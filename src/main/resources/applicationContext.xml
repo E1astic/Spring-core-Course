@@ -23,34 +23,14 @@
           class="ru.fil.springcourse.HipHopMusic">
     </bean>
 
-    <!-- создали бин списка из 3 видов музыки -->
-    <bean id="musicList"
-          class="java.util.ArrayList">
-        <constructor-arg>
-            <list>
-                <ref bean = "classicalMusicBean"/>
-                <ref bean="rockMusicBean"/>
-                <ref bean="hipHopMusicBean" />
-            </list>
-        </constructor-arg>
-    </bean>
-
-    <!-- создали бин плеера, где через сеттер передали созданный список -->
+    <!-- по стандарту scope у бина стоит singleton (каждый раз при вызове getBean() возвращается 1 объект) - подходит для неизменяемых состояний
+     если пропишем scope="prototype", то при каждом вызове getBean() возвращаются разные объекты - подходит для изменяемых состояний-->
     <bean id="musicPlayer"
-          class="ru.fil.springcourse.MusicPlayer">
-        <property name="musicList" ref="musicList"/>
+          class="ru.fil.springcourse.MusicPlayer"
+          scope="prototype">
+        <property name="name" value="Simple music player"/>
+        <property name="volume" value="66"/>
     </bean>
-
-
-    <!-- property - вызываем сеттер с параметром ref (слово set в названии сеттера отбрасывается спрингом,
-    все переводится в нижний регистр и ищется только music из setMusic
-    <bean id="musicPlayer"
-          class="ru.fil.springcourse.MusicPlayer">
-        <property name="music" ref="classicalMusicBean" />
-
-        <property name="name" value="${musicPlayer.name}" />     подставляем объекты из файла
-        <property name="volume" value="${musicPlayer.volume}"/>
-    </bean> -->
 
 
 </beans>
