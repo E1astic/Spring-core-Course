@@ -11,15 +11,16 @@ public class TestSpring {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         try {
-            MusicPlayer player = context.getBean("musicPlayer", MusicPlayer.class);
-            System.out.println("link on player1:  "+player);
+            // При создании одинаковых singleton-бинов методы init-method и destroy-method вызываются только 1 раз
+            // Причем init-method выполняется, даже если мы не вызываем getBean()
+            ClassicalMusic classicalMusic=context.getBean("classicalMusicBean", ClassicalMusic.class);
+            ClassicalMusic classicalMusic2=context.getBean("classicalMusicBean", ClassicalMusic.class);
 
-            MusicPlayer player2 = context.getBean("musicPlayer", MusicPlayer.class);
-            System.out.println("link on player2:  "+player2);
 
-            player2.setVolume(100);
-            System.out.println(player.getVolume());
-            System.out.println(player2.getVolume());
+            // При создании одинаковых prototype-бинов метод init-method вызывается каждый раз, а destroy-method не вызывается вообще
+            // init-method вызывается только при вызове getBean()
+            RockMusic rockMusic=context.getBean("rockMusicBean", RockMusic.class);
+            RockMusic rockMusic2=context.getBean("rockMusicBean", RockMusic.class);
         }
         catch(NoSuchBeanDefinitionException e) {
             System.out.println("Bean not found");

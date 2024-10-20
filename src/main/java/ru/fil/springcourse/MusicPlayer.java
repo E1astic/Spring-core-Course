@@ -18,7 +18,6 @@ public class MusicPlayer {
         this.music=music;
     }
 
-    @Autowired
     public MusicPlayer(List<Music> musicList) {
         this.musicList=musicList;
     }

@@ -12,25 +12,20 @@
     <context:property-placeholder location="classpath:musicPlayer.properties" />
 
 
-    <!-- создали 3 бина каждого вида музыки -->
     <bean id="classicalMusicBean"
-          class="ru.fil.springcourse.ClassicalMusic">
-    </bean>
-    <bean id="rockMusicBean"
-          class="ru.fil.springcourse.RockMusic">
-    </bean>
-    <bean id="hipHopMusicBean"
-          class="ru.fil.springcourse.HipHopMusic">
+           class="ru.fil.springcourse.ClassicalMusic"
+           init-method="doMyInit"
+           destroy-method="doMyDestroy"
+           factory-method="getClassicalMusic">  <!-- Говорим, что этот бин нужно создавать через фабричный метод, а не конструктор -->
     </bean>
 
-    <!-- по стандарту scope у бина стоит singleton (каждый раз при вызове getBean() возвращается 1 объект) - подходит для неизменяемых состояний
-     если пропишем scope="prototype", то при каждом вызове getBean() возвращаются разные объекты - подходит для изменяемых состояний-->
-    <bean id="musicPlayer"
-          class="ru.fil.springcourse.MusicPlayer"
-          scope="prototype">
-        <property name="name" value="Simple music player"/>
-        <property name="volume" value="66"/>
-    </bean>
+     <bean id="rockMusicBean"
+           class="ru.fil.springcourse.RockMusic"
+           scope="prototype"
+           init-method="doMyInit"
+           destroy-method="doMyDestroy">
+     </bean>
 
 
-</beans>
+
+ </beans>
