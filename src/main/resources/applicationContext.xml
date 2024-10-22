@@ -8,24 +8,8 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- загружаем содержимое файла musicPlayer.properties-->
-    <context:property-placeholder location="classpath:musicPlayer.properties" />
 
-
-    <bean id="classicalMusicBean"
-           class="ru.fil.springcourse.ClassicalMusic"
-           init-method="doMyInit"
-           destroy-method="doMyDestroy"
-           factory-method="getClassicalMusic">  <!-- Говорим, что этот бин нужно создавать через фабричный метод, а не конструктор -->
-    </bean>
-
-     <bean id="rockMusicBean"
-           class="ru.fil.springcourse.RockMusic"
-           scope="prototype"
-           init-method="doMyInit"
-           destroy-method="doMyDestroy">
-     </bean>
-
-
+    <!-- сканируем все компоненты (@Component) спринга из заданного пакета  -->
+    <context:component-scan base-package="ru.fil.springcourse"/>
 
  </beans>

@@ -1,16 +1,12 @@
 package ru.fil.springcourse;
 
+import org.springframework.stereotype.Component;
+
+@Component("musicBean")   // по стандарту создает бин с id - названием класса с маленькой буквы
 public class RockMusic implements Music{
     @Override
     public String getSong() {
         return "Rock music song";
     }
 
-    public void doMyInit(){
-        System.out.println("Doing my initialization");
-    }
-
-    public void doMyDestroy(){
-        System.out.println("Doing my destroy");
-    }
 }
