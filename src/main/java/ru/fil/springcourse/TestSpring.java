@@ -11,11 +11,10 @@ public class TestSpring {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         try {
-            Music music=context.getBean("musicBean", Music.class);
-            System.out.println(music.getSong());
-
-            Music music2=context.getBean("classicalMusic", ClassicalMusic.class);
-            System.out.println(music2.getSong());
+            // двухэтапное внедрение зависимостей
+            // (RockMusic, ClassicalMusic) -> MusicPlayer -> Computer
+            Computer computer=context.getBean("computer", Computer.class);
+            System.out.println(computer);
         }
         catch(NoSuchBeanDefinitionException e) {
             System.out.println("Bean not found");
