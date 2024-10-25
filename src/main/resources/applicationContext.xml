@@ -12,5 +12,8 @@
     <!-- сканируем все компоненты (@Component) спринга из заданного пакета  -->
     <context:component-scan base-package="ru.fil.springcourse"/>
 
+    <!-- подгружаем файл с параметрами    (property-placeholder - заполнитель свойств) -->
+    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+
 
  </beans>

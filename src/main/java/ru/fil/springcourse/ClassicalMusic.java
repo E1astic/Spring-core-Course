@@ -1,19 +1,27 @@
 package ru.fil.springcourse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 
 @Component
 public class ClassicalMusic implements Music{
-    private String[] songs={"classical song number 1", "classical song number 2", "classical song number 3"};
+
+    @PostConstruct    // выполняется сразу после инициализации бина
+    public void doMyInit(){
+        System.out.println("Doing my initialization");
+    }
+
+    @PreDestroy     // выполняется перед удалением бина
+    public void DoMyDestroy(){
+        System.out.println("Doing my distruction");
+    }
 
     @Override
-    public String getSong(int index) {
-        return songs[index];
+    public String getSong() {
+        return "Playing: classical music";
     }
-
-    public int getSongsLength(){
-        return songs.length;
-    }
-
-
 }

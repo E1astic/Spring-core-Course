@@ -10,14 +10,12 @@ public class TestSpring {
         // считываем содержимое файла и добавляем его в Spring Application Context
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
-
-        // ЗАДАНИЕ - ДЛЯ КАЖДОГО ТИПА МУЗЫКИ СОЗДАТЬ МАССИВ ИЗ 3 ПЕСЕН, СОЗДАТЬ ENUM С 2 ТИПАМИ МУЗЫКИ
-        // В MusicPlayer ВНЕДРИТЬ 2 ЗАВИСИМОСТИ. МЕТОД playMusic() ДОЛЖЕН ПРИНИМАТЬ MusicType
-        // И ИСХОДЯ ИЗ ПЕРЕДАННОГО ТИПА ПРОИГРЫВАТЬ РАНДОМНУЮ МУЗЫКУ ДАННОГО ТИПА
-
         try {
-            MusicPlayer player = context.getBean("musicPlayer", MusicPlayer.class);
-            System.out.println(player.playMusic(MusicType.ROCK));
+            MusicPlayer player =context.getBean("musicPlayer", MusicPlayer.class);
+            System.out.println(player.getName());
+            System.out.println(player.getVolume());
+
+            ClassicalMusic classicalMusic=context.getBean("classicalMusic", ClassicalMusic.class);
         }
         catch(NoSuchBeanDefinitionException e) {
             System.out.println("Bean not found");
