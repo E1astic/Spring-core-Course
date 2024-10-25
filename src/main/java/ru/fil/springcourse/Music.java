@@ -1,5 +1,5 @@
 package ru.fil.springcourse;
 
 public interface Music {
-    String getSong();
+    String getSong(int index);
 }

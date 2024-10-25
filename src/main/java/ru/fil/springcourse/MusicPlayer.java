@@ -6,31 +6,33 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Component
 public class MusicPlayer {
-    // МОЖЕМ ВНЕДРИТЬ ЗАВИСИМОСТИ ТАК - ЧЕРЕЗ ПОЛЯ,  В ЭТОМ СЛУЧАЕ ПИСАТЬ КОНСТРУКТОР НЕТ НЕОБХОДИМОСТИ
-//    @Autowired
-//    @Qualifier("classicalMusic")
-//    private Music music1;                             В ЦЕЛОМ СУЩЕСТВУЕТ 3 ВАРИАНТА ВНЕДРЕНИЯ ЗАВИСИМОСТЕЙ
-//                                                      ЧЕРЕЗ ПОЛЕ,  СЕТТЕР  ИЛИ  КОНСТРУКТОР
-//    @Autowired
-//    @Qualifier("rockMusic")
-//    private Music music2;
 
-    private Music music1;
-    private Music music2;
-
-    // А МОЖЕМ И ТАК
     @Autowired
-    public MusicPlayer(@Qualifier("classicalMusic") Music music1,
-                       @Qualifier("rockMusic") Music music2) {
-        this.music1=music1;
-        this.music2=music2;
-    }
+    private ClassicalMusic classicalMusic;
+    @Autowired
+    private RockMusic rockMusic;
 
-    public String playMusic(){
-        return"Playing: " + music1.getSong()+",  "+music2.getSong();
+
+    public String playMusic(MusicType musicType) {
+        String res=null;
+        if(musicType==MusicType.CLASSICAL) {
+            Random random=new Random();
+            int randIndex=random.nextInt(classicalMusic.getSongsLength());
+
+            res="Playing: "+classicalMusic.getSong(randIndex);
+        }
+        else{
+            Random random=new Random();
+            int randIndex=random.nextInt(rockMusic.getSongsLength());
+
+            res="Playing: "+rockMusic.getSong(randIndex);
+        }
+
+        return res;
     }
 
 
