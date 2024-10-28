@@ -2,13 +2,14 @@ package ru.fil.springcourse;
 
 
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestSpring {
     public static void main(String[] args) {
 
-        // считываем содержимое файла и добавляем его в Spring Application Context
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        // теперь по-другому загружаем конфигурацию - java-код
+        AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(SpringConfig.class);
 
         try {
             MusicPlayer player =context.getBean("musicPlayer", MusicPlayer.class);

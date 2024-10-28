@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 
-@Component
+
 public class ClassicalMusic implements Music{
 
     @PostConstruct    // выполняется сразу после инициализации бина
