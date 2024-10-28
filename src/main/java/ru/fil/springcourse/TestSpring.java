@@ -11,12 +11,12 @@ public class TestSpring {
         // теперь по-другому загружаем конфигурацию - java-код
         AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(SpringConfig.class);
 
-        try {
-            MusicPlayer player =context.getBean("musicPlayer", MusicPlayer.class);
-            System.out.println(player.getName());
-            System.out.println(player.getVolume());
+        // ЗАДАНИЕ: СОЗДАТЬ БИНЫ 3 ВИДОВ МУЗЫКИ, СОЗДАТЬ БИН СПИСКА ВИДОВ МУЗЫКИ, ВНЕДРИТЬ ЗАВИСИМОСТЬ СПИСКА В MusicPlayer
+        // МЕТОД playMusic() ДОЛЖЕН ПРОИГРЫВАТЬ СЛУЧАЙНУЮ ПЕСНЮ ИЗ СПИСКА МУЗЫКИ
 
-            ClassicalMusic classicalMusic=context.getBean("classicalMusic", ClassicalMusic.class);
+        try {
+            MusicPlayer player=context.getBean("musicPlayer", MusicPlayer.class);
+            System.out.println(player.playMusic());
         }
         catch(NoSuchBeanDefinitionException e) {
             System.out.println("Bean not found");

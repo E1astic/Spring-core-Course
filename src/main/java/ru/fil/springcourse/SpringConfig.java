@@ -1,10 +1,12 @@
 package ru.fil.springcourse;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.GenericApplicationContextExtensionsKt;
+import org.springframework.context.annotation.Scope;
+
+import java.util.Arrays;
+import java.util.List;
 
 // ДАННЫЙ КЛАСС ПО СВОЕМУ ФУНКЦИОНАЛУ ПОЛНОСТЬЮ СОВПАДАЕТ С XML - КОНФИГУРАЦИЕЙ С ПРОШЛЫХ УРОКОВ
 
@@ -24,13 +26,19 @@ public class SpringConfig {
     }
 
     @Bean
-    public MusicPlayer musicPlayer() {
-        return new MusicPlayer(classicalMusic(), rockMusic());
+    public HipHopMusic hipHopMusic(){
+        return new HipHopMusic();
     }
 
     @Bean
-    public Computer computer(){
-        return new Computer(musicPlayer());
+    public List<Music> musicList(){
+        return Arrays.asList(classicalMusic(), rockMusic(), hipHopMusic());    // внедрение зависимостей
     }
+
+    @Bean
+    public MusicPlayer musicPlayer() {
+        return new MusicPlayer(musicList());    // внедрение зависимостей
+    }
+
 
 }
